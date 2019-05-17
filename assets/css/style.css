@@ -10,3 +10,17 @@
     margin: 0 auto;
     display: flex;
 }
+
+.choice{
+    border: solid 2px green;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.question{
+    font-family: 'Montserrat 600', sans-serif;
+    font-size: 25px;
+    margin: 20px;
+}

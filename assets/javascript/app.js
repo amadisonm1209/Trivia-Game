@@ -1,29 +1,53 @@
 //Global Variables
 const questionsList = [{
-        question: "When did beer become legal in Iceland?",
-        answers:["1865", "1950", "1989", "2018"],
-        correctAnswer: "2"
-
+        question: "What is the only native mammal to Iceland?",
+        answers:["Cow", "Arctic Fox", "Reindeer", "Sheep"],
+        correctAnswer: 1
     }, {
         question: "When did beer become legal in Iceland?",
         answers: ["1865", "1950", "1989", "2018"],
-        correctAnswer: "2"
+        correctAnswer: 2
     }, {
         question: "Which of these is NOT a musuem in Iceland?",
         answers: ["The Icelandic Ice Musuem", "The Icelandic Phallological Musuem", "The Icelandic Punk Musuem", "Icelandic Sorcery and Witchcraft"],
-        correctAnswer: "0"
+        correctAnswer: 0
     }, {
-        question: "When did beer become legal in Iceland?",
-        answers: ["1865", "1950", "1989","2018"],
-        correctAnswer: "2"
+        question: "What percent of Icelanders believe in elves and trolls?",
+        answers: ["5%", "10%", "25%", "Over 50%"],
+        correctAnswer: 3
+    }, {
+        question: "How many train stations are there in Iceland?",
+        answers: ["100", "0", "50", "200"],
+        correctAnswer: 1
+    }, {
+        question: "Which of these countries formerly ruled Iceland prior to 1944, where it become an independent republic?",
+        answers: ["Spain", "Norway", "The United States", "Greenland"],
+        correctAnswer: 1
+    }, {
+        question: "What is the main industry that Iceland depends on?",
+        answers: ["Natural Gas", "Technology", "Coffee Industry", "Fishing Industry"],
+        correctAnswer: 3
+    }, {
+        question: "Which major show filmed in Iceland, including the iconic Kirkjufell Mountain?",
+        answers: ["Game of Thrones", "Lord of the Rings", "Brooklyn Nine-Nine", "Stranger Things"],
+        correctAnswer: 0
+    }, {
+        question: "Which of these is NOT a musuem in Iceland?",
+        answers: ["The Icelandic Ice Musuem", "The Icelandic Phallological Musuem", "The Icelandic Punk Musuem", "Icelandic Sorcery and Witchcraft"],
+        correctAnswer: 0
+    }, {
+        question: "How many volcanoes are there on the island?",
+        answers: ["30", "Less than 50", "100","Over 125"],
+        correctAnswer: 3
     }];
 
 
-
-let correct = 0;
-let incorrect = 0;
-let currentQuestion = 0; //sets the index value of the current question
-let answered = false; //will stop the clock when answered and allow only one choice
+var timeLeft = 20;
+var intervalId;
+var correct = 0;
+var incorrect = 0;
+var currentQuestion = 0; //sets the index value of the current question
+var answered = false; //will stop the clock when answered and allow only one choice
 
 //Objects with questions, answer options, answer and image
 //Counters for incorrect and correct
@@ -39,11 +63,18 @@ $("#start-button").on("click", function startQuiz(){
     generateQuiz();
     });
 
-function generateQuiz() {
 
-    // if (answered === false){
-    //     timer(); //starts the timer
-    // }
+
+function generateQuiz() {
+    answered = false;
+    timeLeft = 20;
+
+    clearInterval(intervalId);
+    intervalId = setInterval(timer, 1000);
+  
+  if (answered === false) {
+    timer();
+  }
 
     var question = questionsList[currentQuestion].question;
     $(".question").text(question);
@@ -52,18 +83,70 @@ function generateQuiz() {
     for (var i = 0; i < 4; i++) {
 
     var choices = questionsList[currentQuestion].answers[i];
-    var options = $("<div class = choice id='data-value + [i]'></div");
+    var options = $("<div class= choice data-id=" + i + "></div>");
     $(options).text(choices);
     $(".answer-list").append(options);
 
     };
 
+    $(".choice").on("click", function(){
+        var value = $(this).data('id');
+        console.log(value);
+
+        if (value === questionsList[currentQuestion].correctAnswer) {
+            alert("Win!");
+            answered = true;
+            reset();
+            //function correct answer screen and add correct
+        } else {
+            alert("Nope");
+            answered = true;
+             reset();
+            //function answer screen and add incorrect
+        }
+    });
+
 
 };
 
-// function timer (){
+function timer () {
+        
+        timeLeft--;
 
-// }
+        $(".timer").text(timeLeft);
+        if (timeLeft === 0){
+            stop();
+            incorrect++;
+        }
+};
+
+function stop (){
+    clearInterval(intervalId);
+}
+
+function reset(){
+    $(".answer-list").empty();
+    $(".question").empty();
+    $(".timer").empty();
+    answered = false;
+    
+    currentQuestion ++;
+
+     if (currentQuestion < questionsList.length){
+         setTimeout(function (){
+             generateQuiz();
+         }, 2000);
+
+     } else {
+         setTimeout(function (){
+             $(".question").remove();
+             $(".timer").remove();
+             //display results page
+             $(".results").append("<h2 class= end-answers> Correct Answers:" + correct + "</h2>");
+             $(".results").append("<h2 class= end-answers> Incorrect Answers:" + incorrect + "</h2>");
+         }, 3000);
+     }
+}
 
 // function reset(){
 
