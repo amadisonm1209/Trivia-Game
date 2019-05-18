@@ -128,7 +128,7 @@ function reset() {
     $(".results").empty();
     $(".answer-list").empty();
     $(".question").empty();
-    $(".timer").remove();
+    $(".timer").empty();
     answered = false;
 
     currentQuestion++;
@@ -144,19 +144,19 @@ function reset() {
             $(".timer").remove();
             //display results page
             $(".results").append("<h2 class= end-answers>Well Done! Here are your results: </h2>");
-            $(".results").append("<h2 class= end-answers> Correct Answers:" + correct + "</h2>");
-            $(".results").append("<h2 class= end-answers> Incorrect Answers:" + incorrect + "</h2>");
+            $(".results").append("<h2 class= end-answers> Correct Answers: " + correct + "</h2>");
+            $(".results").append("<h2 class= end-answers> Incorrect Answers: " + incorrect + "</h2>");
         }, 5000);
     }
 }
 
 function answer() {
-
+    correct++;
     setTimeout(function () {
-        correct++;
+
         $(".answer-list").empty();
         console.log("hey")
-        $(".inbetween").text("Nicely Done! The correct answer was: " + questionsList[currentQuestion].answers[correctAnswer]);
+        $(".inbetween").append("<h2> Nicely Done! The correct answer was: " + questionsList[currentQuestion].answers[questionsList[currentQuestion].correctAnswer] + "</h2>");
         reset();
     }, 1000);
 };
@@ -165,7 +165,7 @@ function incorrectAnswer() {
     setTimeout(function () {
         incorrect++;
         $(".answer-list").empty();
-        $(".inbetween").text("Nope! The correct answer was: " + questionsList[currentQuestion].answers[correctAnswer]);
+        $(".inbetween").append("<h2> Nope! The correct answer was: " + questionsList[currentQuestion].answers[questionsList[currentQuestion].correctAnswer] + "</h2>");
         reset();
     }, 1000);
 };
