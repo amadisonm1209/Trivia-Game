@@ -96,10 +96,12 @@ function generateQuiz() {
 
         if (value === questionsList[currentQuestion].correctAnswer) {
             answered = true;
+            stop();
             answer();
             //function correct answer screen and add correct
         } else {
             answered = true;
+            stop ();
             incorrectAnswer();
             //function answer screen and add incorrect
         }
@@ -115,8 +117,7 @@ function timer() {
     $(".timer").text("Time Remaining: " + timeLeft);
     if (timeLeft === 0) {
         stop();
-        incorrect++;
-        incorrectAnswer();
+        timesUp();
     }
 };
 
@@ -155,6 +156,7 @@ function answer() {
     setTimeout(function () {
 
         $(".answer-list").empty();
+        $(".timer").empty();
         console.log("hey")
         $(".inbetween").append("<h2> Nicely Done! The correct answer was: " + questionsList[currentQuestion].answers[questionsList[currentQuestion].correctAnswer] + "</h2>");
         reset();
@@ -162,10 +164,21 @@ function answer() {
 };
 
 function incorrectAnswer() {
+    incorrect++;
     setTimeout(function () {
-        incorrect++;
         $(".answer-list").empty();
+        $(".timer").empty();
         $(".inbetween").append("<h2> Nope! The correct answer was: " + questionsList[currentQuestion].answers[questionsList[currentQuestion].correctAnswer] + "</h2>");
+        reset();
+    }, 1000);
+};
+
+function timesUp() {
+    incorrect++;
+    setTimeout(function () {
+        $(".answer-list").empty();
+        $(".timer").empty();
+        $(".inbetween").append("<h2> Looks like you ran out of time! The correct answer was: " + questionsList[currentQuestion].answers[questionsList[currentQuestion].correctAnswer] + "</h2>");
         reset();
     }, 1000);
 };
