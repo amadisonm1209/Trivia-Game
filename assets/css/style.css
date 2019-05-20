@@ -1,7 +1,15 @@
-.jumbotron {
-    background-image: url("https://images.unsplash.com/photo-1489864983806-4d0d07e2d37d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1498&q=80");
+body{
+    background-image: url("https://images.unsplash.com/photo-1482093378251-82b99034041a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2934&q=80");
+
+
+
+}
+.jumbotron,
+.header {
+    background-color: black;
     margin-top: 20px;
-    background-size: cover;
+    font-family: 'Petit Formal Script', cursive;
+    font-size: 90px;
 }
 
 .map{
@@ -13,6 +21,8 @@
 
 .choice{
     border: solid 2px green;
+    background-color: darkslategray;
+    color: azure;
     font-family: 'Montserrat', sans-serif;
     font-size: 20px;
     padding: 10px;
@@ -20,7 +30,29 @@
 }
 
 .question{
+    color: azure;
     font-family: 'Montserrat 600', sans-serif;
     font-size: 25px;
     margin: 20px;
 }
+h2{
+    color: azure;
+    font-family: 'Montserrat 600', sans-serif;
+    font-size: 25px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.timer{
+    color: azure;
+    font-family: 'Montserrat 600', sans-serif;
+    font-size: 18px;
+}
+.quiz{
+    background-image: url("https://images.unsplash.com/photo-1476970980147-71209edbfa4f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80");
+    background-size: cover;
+    padding: 20px;
+}
+img{
+    max-height: 600px;
+}
+
